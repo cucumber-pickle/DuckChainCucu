@@ -38,8 +38,8 @@ Processing account 1 / 3
 1. **Клонируйте репозиторий**
 
    ```bash
-   git clone https://github.com/cucumber-pickle/DuckChainCum.git
-   cd DuckChainCum
+   git clone https://github.com/cucumber-pickle/DuckChainCucu.git
+   cd DuckChainCucu
    ```
 
 2. **Создайте виртуальную среду (не обязательно):**

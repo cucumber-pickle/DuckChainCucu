@@ -41,8 +41,8 @@ Processing account 1 / 3
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/cucumber-pickle/DuckChainCum.git
-   cd DuckChainCum
+   git clone https://github.com/cucumber-pickle/DuckChainCucu.git
+   cd DuckChainCucu
    ```
 
 2. **Create a virtual environment (optional but recommended)**
