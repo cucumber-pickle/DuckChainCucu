@@ -1,0 +1,8 @@
+{
+    "use_proxy": true,
+    "quack_amount": 1,
+    "quack_delay": 0.2,
+    "account_delay": 2,
+    "complete_task": true,
+    "countdown_loop": 1
+  }
