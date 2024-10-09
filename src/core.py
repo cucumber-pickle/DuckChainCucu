@@ -8,6 +8,7 @@ from colorama import *
 from src.cucumber import read_config, mrh, pth, kng, htm, bru, hju, countdown_timer, log, log_line
 from src.agent import generate_random_user_agent
 from datetime import datetime
+import http
 
 init(autoreset=True)
 config = read_config()
