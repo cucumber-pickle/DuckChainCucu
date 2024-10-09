@@ -124,23 +124,37 @@ python main.py
 Load the accounts from `data.txt`.
 Process each account by fetching user info, performing daily sign-in, opening all boxes, executing quacks, and completing tasks (if enabled).
 
-### Project Structure
-   ```plaintext
-├── README.md              # This file
-├── config.json            # Configuration file for bot settings
-├── data.txt               # File containing DuckChain account tokens
-├── proxies.txt            # File containing proxy list (if applicable)
-├── requirements.txt       # Python dependencies
-├── main.py                # Main bot script
-├── src/
-│   ├── __init__.py        # 
-│   ├── agent.py           # User agent generation logic
-│   ├── deeplchain.py      # Logging and helper functions
-└── .env                   # (Optional) Environment variables for sensitive information
-   ```
+## How to get tgWebAppData (query_id / user_id)
+
+1. Login telegram via portable or web version
+2. Launch the bot
+3. Press `F12` on the keyboard 
+4. Open console
+5. Сopy this code in Console for getting tgWebAppData (user= / query=):
+
+```javascript
+copy(decodeURIComponent(sessionStorage['telegram-apps/launch-params']).split('tgWebAppData=')[1].split('&tgWebAppStartParam')[0])
+```
+
+6. you will get data that looks like this
+
+```
+query_id=AA....
+user=%7B%22id%....
+```
+7. add it to `data.txt` file or create it if you dont have one
+
+
+## This bot helpfull?  Please support me by buying me a coffee: 
+```
+0xc4bb02b8882c4c88891b4196a9d64a20ef8d7c36 - BSC (BEP 20)
+UQBiNbT2cqf5gLwjvfstTYvsScNj-nJZlN2NSmZ97rTcvKz0 - TON
+0xc4bb02b8882c4c88891b4196a9d64a20ef8d7c36 - Optimism
+THaLf1cdEoaA73Kk5yiKmcRwUTuouXjM17 - TRX (TRC 20)
+```
 
 ## License
-This project is licensed under the `MIT License`.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Contact
 For questions or support, please contact [CUCUMBER TG CHAT](https://t.me/cucumber_scripts_chat)
