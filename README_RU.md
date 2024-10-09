@@ -3,6 +3,10 @@
 
 [TELEGRAM CHANNEL](https://t.me/cucumber_scripts)
 
+## Обновления
+- **09.10.24** Задания выполняются для всех категорий, а не только для Partner
+
+
 # Регистрация
 DuckChain работает на сети TON L2, поддерживаемой Arbitrum, и стремится привлечь ликвидность и пользователей из 
 экосистем Ethereum Virtual Machine (EVM) и Bitcoin в экосистему TON.

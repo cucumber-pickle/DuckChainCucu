@@ -3,6 +3,9 @@ A Python-based automation bot for interacting with the DuckChain API. This bot c
 
 [TELEGRAM CHANNEL](https://t.me/cucumber_scripts)
 
+## Updates
+- **09.10.24** Tasks are performed for all categories, not just for Partner
+
 # REGISTRATIONS (BIG AIRDROP POTENTIAL)
 ***What is duckchain?*** Duckchain is the TON L2 powered by Arbitrum. Bringing Liquidity and users from EVM and Bitcoin ecosystem into TON : [announcements](https://x.com/arbitrum/status/1820820056965812287)
 
