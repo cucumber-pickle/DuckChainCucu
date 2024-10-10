@@ -232,7 +232,7 @@ def main():
         log(htm + "~" * 38)
 
         user_info = duck.get_user_info()
-        if user_info.get('code') == 200:
+        if user_info and user_info.get('code') == 200:
             duck_name = user_info['data']['duckName']
             if not duck_name:
                 log(f'{Fore.RED} no Duck name!')
