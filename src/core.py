@@ -240,7 +240,7 @@ def main():
                 open("http.log", "a", encoding="utf-8").write(
                     f"{now} / {index}  / {token} / no Duck name\n")
                 continue
-        if user_info.get('code') != 500:
+        if user_info and user_info.get('code') != 500:
             log_user_info(user_info)
 
             duck.perform_sign()
