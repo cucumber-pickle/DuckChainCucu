@@ -5,5 +5,5 @@
     "account_delay": 2,
     "complete_task": true,
     "countdown_loop": 1,
-    "connect_wallets": false,
+    "connect_wallets": false
   }
