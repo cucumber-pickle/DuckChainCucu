@@ -84,7 +84,8 @@ Create a config.json file in the project root directory:
    "quack_amount": 5,
    "complete_task": false,
    "account_delay": 5,
-   "countdown_loop": 3600
+   "countdown_loop": 3600,
+   "connect_wallets": false
 }
    ```
 - `use_proxy`: Enable/disable proxy usage (true/false).
@@ -93,6 +94,10 @@ Create a config.json file in the project root directory:
 - `complete_task`: Enable/disable automatic task completion (true/false).
 - `account_delay`: Delay (in seconds) between processing each account.
 - `countdown_loop`: Time (in seconds) before restarting the bot cycle.
+- `connect_wallets` - Enable/disable automatic connect TON wallets (true/false). if you want to connect wallets, add the addresses of TON wallets to wallets.txt . 
+The number of wallets must match the number of accounts. 
+
+Example of an address - `UQAIsAepLajIsWU58DxPTM7D_GQG01MSk63qJckHQ9WBj2QC`
 
 ## Query Setup:
 

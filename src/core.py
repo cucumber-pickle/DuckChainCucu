@@ -33,7 +33,6 @@ class DuckChainAPI:
 
         if params:
             url += '?' + urllib.parse.urlencode(params)
-        # print(f'3 url - {url}')
         req = urllib.request.Request(url, headers=self.headers)
 
         if self.proxy:
@@ -70,7 +69,36 @@ class DuckChainAPI:
 
     def get_tasks(self):
         return self._make_request("/task/task_list")
-    
+
+    def connect(self, wallet, market, retries=2):
+        url = f"https://preapi.duckchain.io/transport/wallet/{market}/bind?wallet={wallet}"
+
+        req = urllib.request.Request(url, headers=self.headers)
+
+        if self.proxy:
+            proxy_handler = urllib.request.ProxyHandler({'http': self.proxy, 'https': self.proxy})
+            opener = urllib.request.build_opener(proxy_handler)
+            urllib.request.install_opener(opener)
+
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                result = json.load(response).get('message')
+        except urllib.error.HTTPError as e:
+            log(f"HTTPError: {e.code} - {e.reason}")
+            return None
+        except urllib.error.URLError as e:
+            log(f"URLError: {e.reason}")
+            log(htm + "~" * 38)
+            return None
+
+        if result and result == "SUCCESS":
+            log(hju + f"Successfully connected wallet to {market}")
+        elif result:
+            log(mrh + f"Failed to connect wallet to {market} - {result}")
+        else:
+            log(mrh + f"Failed to connect wallet to {market}")
+
+
     def perform_sign(self):
         check_in_response = self.check_in()
         if check_in_response and check_in_response.get("code") == 200:
@@ -207,12 +235,16 @@ def main():
         log("File 'config.json' not found.")
         return
 
+    with open('wallets.txt', 'r') as file:
+        wallets = [line.strip() for line in file if line.strip()]
+
     use_proxy = config.get("use_proxy", False)
     quack_delay = config.get("quack_delay", 0)
     quack_amount = config.get("quack_amount", 10)
     complete_task = config.get("complete_task", False)
     account_delay = config.get("account_delay", 5)
     countdown_loop = config.get("countdown_loop", 3800)
+    connect_wallets = config.get("connect_wallets", False)
     try:
         with open('data.txt', 'r') as file:
             tokens = [line.strip() for line in file if line.strip()]
@@ -230,6 +262,19 @@ def main():
         duck = DuckChainAPI(authorization=token, proxy=proxy)
         log(bru + f"Processing account {pth}{index} / {total_accounts}") 
         log(htm + "~" * 38)
+
+        if connect_wallets:
+            if len(wallets) >= len(tokens):
+                wallet = wallets[index-1]
+                log(
+                    f"{Fore.GREEN + Style.BRIGHT}Connect wallet:{Style.RESET_ALL}"
+                    f"{Fore.WHITE + Style.BRIGHT}{wallet}{Style.RESET_ALL}")
+            else:
+                log(
+                    Fore.RED + "The number of wallets is less than the number of accounts. The connection of wallets is disabled!")
+                wallet = None
+        else:
+            wallet = None
 
         user_info = duck.get_user_info()
         if user_info and user_info.get('code') == 200:
@@ -262,6 +307,14 @@ def main():
                     log(htm + f"No tasks found on the response")
             else:
                 log(kng + f"Auto complete task is disable!")
+
+            if wallet:
+                markets = ['bitget', 'okx']
+
+                for market in markets:
+                    duck.connect(wallet, market)
+                    time.sleep(2)
+
 
             log_line()
             countdown_timer(account_delay)

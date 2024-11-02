@@ -4,5 +4,6 @@
     "quack_delay": 0.2,
     "account_delay": 2,
     "complete_task": true,
-    "countdown_loop": 1
+    "countdown_loop": 1,
+    "connect_wallets": false,
   }
