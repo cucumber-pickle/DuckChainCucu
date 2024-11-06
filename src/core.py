@@ -70,6 +70,19 @@ class DuckChainAPI:
     def get_tasks(self):
         return self._make_request("/task/task_list")
 
+    def get_eggs(self):
+        eggs = self._make_request("/property/daily/isfinish?taskId=1")
+        if eggs and eggs.get('data') == 0:
+            x = self._make_request("/property/daily/finish?taskId=1")
+        else:
+            x = None
+        if x and x.get('code') == 200:
+            log(Fore.GREEN + 'SUCCESS collect 10 eggs')
+        else:
+            log(Fore.RED + 'Eggs allready collect')
+
+        return
+
     def connect(self, wallet, market, retries=2):
         url = f"https://preapi.duckchain.io/transport/wallet/{market}/bind?wallet={wallet}"
 
@@ -136,6 +149,7 @@ class DuckChainAPI:
         url = f"/task/{category}"
         params = {'taskId': task_id}
         return self._make_request(url, params)
+
 
 
     def perform_tasks(self, tasks_response):
@@ -209,7 +223,7 @@ def log_user_info(user_info):
         data = user_info['data']
         duck_name = data['duckName']
         log(hju + f"Duck name: {pth}{duck_name}")
-        log(hju + f"Decibels: {pth}{data['decibels']}{hju}| Box Amount: {pth}{data['boxAmount']} ")
+        log(hju + f"Decibels: {pth}{data['decibels']}{hju}| Eggs: {pth}{data['eggs']} {hju}| Box Amount: {pth}{data['boxAmount']} ")
     else:
         log(mrh + f"Failed to retrieve user info. Code: {user_info['code']}, Message: {user_info['message']}")
 
@@ -290,6 +304,10 @@ def main():
 
             duck.perform_sign()
             duck.open_all_boxes()
+
+            duck.get_eggs()
+
+
 
             for i in range(quack_amount):
                 quack_result = duck.execute_tap()
