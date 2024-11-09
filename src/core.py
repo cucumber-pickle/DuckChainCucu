@@ -323,6 +323,23 @@ def main():
                     duck.perform_tasks(tasks)
                 else:
                     log(htm + f"No tasks found on the response")
+
+                #дейли чекин бибанс и ОКХ
+                task_ids = [2, 159]
+                task_type = "wallet/collection"
+                for task in task_ids:
+                    if task == 2:
+                        wal = "Okx"
+                    else:
+                        wal = 'Binance'
+                    completion_response = duck.complete_task(task, task_type)
+                    if completion_response and completion_response.get("code") == 200:
+                        log(hju + f"Successfully! {wal} check in")
+                    elif completion_response and completion_response.get("code") == 500:
+                        log(f"{kng}{wal} check in was finished ")
+                    else:
+                        log(kng + f"Failed! {wal} check in {htm}{completion_response}.")
+
             else:
                 log(kng + f"Auto complete task is disable!")
 
