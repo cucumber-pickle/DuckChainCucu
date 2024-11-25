@@ -15,7 +15,7 @@ config = read_config()
 
 class DuckChainAPI:
     def __init__(self, authorization, proxy=None, timeout=10):
-        self.base_url = "https://preapi.duckchain.io"
+        self.base_url = "https://ppp.duckchain.io"
         self.authorization = f'tma {authorization}'
         self.headers = {
             "accept": "*/*",
@@ -300,6 +300,7 @@ def main():
                     f"{now} / {index}  / {token} / no Duck name\n")
                 continue
         if user_info and user_info.get('code') != 500:
+
             log_user_info(user_info)
 
             duck.perform_sign()
@@ -347,8 +348,11 @@ def main():
                 markets = ['bitget', 'okx']
 
                 for market in markets:
-                    duck.connect(wallet, market)
-                    time.sleep(2)
+                    try:
+                        duck.connect(wallet, market)
+                        time.sleep(2)
+                    except Exception as e:
+                        log(e)
 
 
             log_line()
